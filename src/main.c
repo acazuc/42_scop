@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:25:09 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 15:25:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 17:41:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "scop.h"
 
-# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
+int	main(int ac, char **av)
+{
+	t_env	env;
 
-#endif
+	ft_bzero(&env, sizeof(env));
+	if (ac != 2)
+	{
+		ft_putstr("Usage: ");
+		ft_putstr(av[0]);
+		ft_putstr(" <filename.obj>");
+		return (EXIT_FAILURE);
+	}
+	obj_load(&env, av[1]);
+	window_init(&env);
+	return (EXIT_SUCCESS);
+}

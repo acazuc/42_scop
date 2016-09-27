@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   read_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 15:35:39 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/16 16:22:36 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 17:40:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int	main(int ac, char **av)
+void	obj_read(t_obj *obj, int fd)
 {
-	t_env	env;
+	ssize_t	readed;
+	char	*line;
 
-	if (ac != 2)
+	while ((line = read_next_line(fd, &readed)) && readed > 0)
 	{
-		ft_putstr("Usage: ");
-		ft_putstr(av[0]);
-		ft_putstr(" <filename.obj>");
+		if (!(line = ft_strtrim(line)))
+			ERROR("Failed to trim line");
+		if (line[0] == 'v' && line[1] == ' ')
+			obj_read_vertex(obj, line);
+		if (line[0] == 'f' && line[1] == ' ')
+			obj_read_face(obj, line);
+		free(line);
 	}
-	obj_load(&env, av[1]);
-	window_init(&env);
-	camera_init(&env);
-	return (0);
+	if (readed == -1)
+		ERROR("failed to read file");
 }

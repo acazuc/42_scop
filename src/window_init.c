@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   window_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:01:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 16:21:54 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/16 15:17:52 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 17:01:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#include "scop.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-
-#endif
+void	window_init(t_env *env)
+{
+	env->window.width = 1280;
+	env->window.height = 720;
+	env->window.name = "acazuc's scop";
+	if (!(env->window.mlx = mlx_init()))
+		ERROR("Failed to init mlx");
+	if (!(env->window.mlx_window = mlx_new_opengl_window(env->window.mlx
+					, env->window.width, env->window.height
+					, env->window.name)))
+		ERROR("Failed to init mlx window");
+}

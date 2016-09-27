@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj.h                                              :+:      :+:    :+:   */
+/*   obj_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:35:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 16:21:40 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/16 15:50:04 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 17:15:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJ_H
-# define OBJ_H
+#include "scop.h"
 
-# include "point_list.h"
-# include "face_list.h"
-
-typedef struct		s_obj
+void	obj_load(t_env *env, char *file)
 {
-	t_point_list	*points;
-	t_face_list		*faces;
-}					t_obj;
+	int		fd;
 
-#endif
+	if ((fd = open(file, O_RDONLY)) == -1)
+		ERROR("Failed to open file");
+	obj_read(&env->obj, fd);
+	close(fd);
+}

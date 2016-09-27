@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   parse_valid_number.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:28:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 15:29:00 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/28 09:24:29 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 17:10:33 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#include "scop.h"
 
-typedef struct	s_vector
+int		parse_valid_number(char *data)
 {
-	double		x;
-	double		y;
-	double		z;
-}				t_vector;
+	int		dot_count;
+	int		i;
 
-#endif
+	dot_count = 0;
+	i = 0;
+	while (data[i])
+	{
+		if ((data[i] < '0' || data[i] > '9') && data[i] != '.'
+				&& data[i] != '-')
+			return (0);
+		if (data[i] == '-' && i != 0)
+			return (0);
+		if (data[i] == '.')
+		{
+			if (dot_count)
+				return (0);
+			dot_count = 1;
+		}
+		i++;
+	}
+	return (1);
+}

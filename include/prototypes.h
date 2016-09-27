@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_load.c                                         :+:      :+:    :+:   */
+/*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:50:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 16:23:30 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/16 15:02:16 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/27 16:26:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#ifndef PROTOTYPES_H
+# define PROTOTYPES_H
 
-void	obj_load(t_env *env, char *file)
-{
-	int		fd;
+# include "env.h"
 
-	if (!(env->obj = malloc(sizeof(*env->obj))))
-		ERROR("Failed to malloc obj struct");
-	env->obj->points = NULL;
-	env->obj->faces = NULL;
-	if ((fd = open(file, O_RDONLY)) == -1)
-		ERROR("Failed to open file");
-	read_obj(en->obj, fd);
-	close(fd);
-}
+void	error_quit(char *error, char *file, int line);
+void	window_init(t_env *env);
+void	camera_init(t_env *env);
+void	obj_load(t_env *env, char *file);
+void	obj_read(t_obj *obj, int fd);
+void	obj_read_face(t_obj *obj, char *line);
+void	obj_read_vertex(t_obj *obj, char *line);
+char	*read_next_line(int fd);
+
+#endif

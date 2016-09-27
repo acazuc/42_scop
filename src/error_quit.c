@@ -6,7 +6,7 @@
 /*   By: acazuc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:32:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 15:26:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 17:25:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void	error_quit(char *error_message, char *file, int line)
 	ft_putnbr_fd(line, 2);
 	ft_putchar_fd(')', 2);
 	ft_putchar_fd('\n', 2);
-	exit(-1);
+	exit(EXIT_FAILURE);
 }
