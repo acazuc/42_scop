@@ -3,3 +3,4 @@ scop
 obj
 *.swp
 mlx/*.o
+glfw
