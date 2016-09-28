@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 14:24:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 16:19:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define SCOP_H
 
 # include "../libft/includes/libft.h"
-# include "../mlx/mlx_opengl.h"
-# include "../mlx/mlx.h"
+# include <GLFW/glfw3.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -55,6 +54,8 @@ void	obj_read_mtllib_read_newmtl(t_obj *obj, char *line);
 char	*read_next_line(int fd, ssize_t *readed);
 int		parse_valid_number(char *datas);
 void	free_array(char **array);
+char	*read_file(char *file);
+GLuint	shader_create(char *vertex, char *fragment);
 
 struct							s_obj_vertex
 {
@@ -120,15 +121,6 @@ struct							s_obj
 	int							smooth;
 };
 
-struct							s_window
-{
-	void						*mlx_window;
-	void						*mlx;
-	char						*name;
-	int							width;
-	int							height;
-};
-
 struct							s_camera
 {
 	float						px;
@@ -141,9 +133,12 @@ struct							s_camera
 
 struct							s_env
 {
-	t_window					window;
+	GLFWwindow					*window;
+	int							window_width;
+	int							window_height;
 	t_camera					camera;
 	t_obj						obj;
+	GLuint						vertexbuffer;
 };
 
 #endif

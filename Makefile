@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/28 14:24:35 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/28 16:21:59 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = scop
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror -Ofast -g
 
-INCLUDES_PATH = include/
+INCLUDES_PATH = include/ -I glfw/include
 
 SRCS_PATH = src/
 
@@ -43,6 +43,8 @@ SRCS_NAME = main.c \
 			obj_read_mtllib_read_newmtl.c \
 			parse_valid_number.c \
 			free_array.c \
+			read_file.c \
+			shader_create.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
@@ -52,13 +54,12 @@ OBJS_NAME = $(SRCS_NAME:.c=.o)
 
 OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 
-LIBRARY = -L libft/ -lft -L mlx/ -lmlx -framework AppKit -framework OpenGL
+LIBRARY = -L libft/ -lft -L glfw/src -lglfw3 -framework AppKit -framework OpenGL -framework IOKit -framework CoreVideo
 
 all: odir $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@make -C mlx
 	@echo " - Making $(NAME)"
 	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBRARY)
 
@@ -71,13 +72,11 @@ odir:
 
 clean:
 	@make -C libft clean
-	@make -C mlx clean
 	@echo " - Cleaning objs"
 	@rm -f $(OBJS)
 
 fclean: clean
 	@make -C libft fclean
-	@make -C mlx clean
 	@echo " - Cleaning executable"
 	@rm -f $(NAME)
 
