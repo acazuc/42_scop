@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 13:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:34:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:46:26 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	obj_read_mtlllib_read(t_obj *obj, int fd)
+void	obj_read_mtllib_read(t_obj *obj, int fd)
 {
 	ssize_t		readed;
 	char		*line;
