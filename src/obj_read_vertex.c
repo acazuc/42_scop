@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:16:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/27 17:24:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 12:00:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void		obj_read_vertex(t_obj *obj, char *line)
 			|| !parse_valid_number(datas[3]))
 		ERROR("invalid obj vertex value");
 	push_vertex(obj, datas);
+	free_array(datas);
 }

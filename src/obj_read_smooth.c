@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_load.c                                         :+:      :+:    :+:   */
+/*   obj_read_smooth.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:50:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:06:48 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/28 12:01:43 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/28 12:15:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	obj_load(t_env *env, char *file)
+void	obj_read_smooth(t_obj *obj, char *line)
 {
-	int		fd;
+	char	**datas;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
-		ERROR("Failed to open file");
-	env->obj.file = file;
-	obj_read(&env->obj, fd);
-	close(fd);
+	if (!(datas = ft_strsplit(line, ' ')))
+		ERROR("ft_strsplit failed");
+	if (!datas[1] || datas[2])
+		ERROR("invalid obj smooth line");
+	if (!ft_strcmp(datas[1], "1") || !ft_strcmp(datas[1], "on"))
+		obj->smooth = 1;
+	else if (!ft_strcmp(datas[1], "on") || !ft_strcmp(datas[1], "off"))
+		obj->smooth = 0;
+	else
+		ERROR("invalid obj smooth value");
 }

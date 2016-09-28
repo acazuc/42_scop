@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_load.c                                         :+:      :+:    :+:   */
+/*   obj_read_usemtl.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:50:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:06:48 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/28 12:20:34 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/28 12:40:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	obj_load(t_env *env, char *file)
+void	obj_read_usemtl(t_obj *obj, char *line)
 {
-	int		fd;
+	char	**datas;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
-		ERROR("Failed to open file");
-	env->obj.file = file;
-	obj_read(&env->obj, fd);
-	close(fd);
+	if (!(datas = ft_strsplit(line, ' ')))
+		ERROR("ft_strsplit failed");
+	if (!datas[0] || !datas[1] || datas[2])
+		ERROR("invalid usemtl line");
+	if (!(obj->current_mtl = ft_strdup(datas[1])))
+		ERROR("strdup failed");
+	free_array(datas);
 }

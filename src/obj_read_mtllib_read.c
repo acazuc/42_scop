@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   obj_read_mtllib_read.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/16 15:27:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 15:28:27 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/28 13:20:01 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/28 13:22:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#include "scop.h"
 
-# include "vector.h"
-
-typedef struct	s_camera
+void	obj_read_mtlllib_read(t_obj *obj, int fd)
 {
-	t_vector	*position;
-	t_vector	*rotation;
-}				t_camera;
+	ssize_t		readed;
+	char		*line;
 
-#endif
+	while ((line = read_next_line(fd, &readed)) && readed > 0)
+	{
+		if (!(line = ft_strtrim(line)))
+			ERROR("ft_strtrim failed");
+		if (line[0] == 'K' && line[1] == 'a' && line[2] == ' ')
+
+	}
+	if (readed == -1)
+		ERROR("failed to read mtllib file");
+}
