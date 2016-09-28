@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/28 17:16:33 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/28 17:45:12 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS_NAME = main.c \
 			matrix_create_scale.c \
 			matrix_create_rotate.c \
 			matrix_create_projection.c \
+			matrix_mult.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

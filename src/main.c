@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:34:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 17:56:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,44 @@ t_matrix	*get_rotation_matrix()
 	t_matrix	*rx;
 	t_matrix	*ry;
 	t_matrix	*rz;
-	t_matrix	*ro;
 
 	if (!(rx = matrix_create_rotate_x(0)))
 		ERROR("failed to create rotate x matrix");
-	if (!(ry = matrix_create_rotate_y(0)))
+	if (!(ry = matrix_create_rotate_y(1)))
 		ERROR("failed to create rotate y matrix");
-	if (!(rz = matrix_Create_rotate_z(0)))
+	if (!(rz = matrix_create_rotate_z(0)))
 		ERROR("failed to create rotate z matrix");
+	matrix_mult(rx, ry);
+	matrix_mult(rx, rz);
+	free(ry);
+	free(rz);
+	return (rx);
 }
 
-t_matrix	*get_final_matrix()
+t_matrix	*get_final_matrix(t_env *env)
 {
 	t_matrix	*projection;
 	t_matrix	*rotation;
 	t_matrix	*position;
 	t_matrix	*model;
-	t_matrix	*view;
 
 	if (!(projection = matrix_create_projection(ft_toradians(45)
 					, env->window_width / (double)env->window_height
 					, 0.01, 100)))
 		ERROR("failed to create projection matrix");
-	if (!(rotation = matrix_create_rotate
+	if (!(rotation = get_rotation_matrix()))
+		ERROR("failed to create rotation matrix");
+	if (!(position = matrix_create_translation(4, 3, 3)))
+		ERROR("failed to create translation matrix");
+	if (!(model = matrix_create_identity()))
+		ERROR("failed to creatre identity matrix");
+	matrix_mult(projection, rotation);
+	matrix_mult(projection, position);
+	matrix_mult(projection, model);
+	free(rotation);
+	free(position);
+	free(model);
+	return (projection);
 }
 
 void		loop(t_env *env)
@@ -136,10 +151,23 @@ void		loop(t_env *env)
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 	GLuint programID = shader_create("shader.vert", "shader.frag");
+	GLuint MatrixID = glGetUniformLocation(programID, "ft_matrix");
+	t_matrix *matrix;
+	if (!(matrix = get_final_matrix(env)))
+		ERROR("failed to get final matrix");
+	for (int y = 0; y < 4; ++y)
+	{
+		for (int x = 0; x < 4; ++x)
+		{
+			printf("%f ", matrix->value[y][x]);
+		}
+		printf("\n");
+	}
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
+		glUniformMatrix4dv(MatrixID, 1, GL_FALSE, &matrix->value[0][0]);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
