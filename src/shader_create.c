@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 14:47:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 16:25:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 16:35:21 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 static void		check_info_log_error(GLuint id)
 {
+	char	*message;
 	GLint	result;
 	int		info_log_length;
 
 	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(id, GL_INFO_LOG_LENGTH, &info_log_length);
 	if (info_log_length > 0)
+	{
+		if ((message = ft_strnew(info_log_length + 1)))
+		{
+			glGetProgramInfoLog(id, info_log_length, NULL, message);
+			ft_putendl(message);
+		}
 		ERROR("shaders compilation failed");
+	}
 }
 
 static GLuint	read_compile_shader(char *filename, GLuint shader)

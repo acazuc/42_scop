@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 16:05:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 17:34:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,54 @@ static const GLfloat g_color_buffer_data[] = {
 	0.982f,  0.099f,  0.879f
 };*/
 
+t_matrix	*get_rotation_matrix()
+{
+	t_matrix	*rx;
+	t_matrix	*ry;
+	t_matrix	*rz;
+	t_matrix	*ro;
+
+	if (!(rx = matrix_create_rotate_x(0)))
+		ERROR("failed to create rotate x matrix");
+	if (!(ry = matrix_create_rotate_y(0)))
+		ERROR("failed to create rotate y matrix");
+	if (!(rz = matrix_Create_rotate_z(0)))
+		ERROR("failed to create rotate z matrix");
+}
+
+t_matrix	*get_final_matrix()
+{
+	t_matrix	*projection;
+	t_matrix	*rotation;
+	t_matrix	*position;
+	t_matrix	*model;
+	t_matrix	*view;
+
+	if (!(projection = matrix_create_projection(ft_toradians(45)
+					, env->window_width / (double)env->window_height
+					, 0.01, 100)))
+		ERROR("failed to create projection matrix");
+	if (!(rotation = matrix_create_rotate
+}
+
 void		loop(t_env *env)
 {
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	GLuint programID = shader_create("shader.vert", "shader.frag");
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(programID);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-				3,                  // size
-				GL_FLOAT,           // type
-				GL_FALSE,           // normalized?
-				0,                  // stride
-				(void*)0            // array buffer offset
-				);
-		glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDisableVertexAttribArray(0);
 		glfwSwapBuffers(env->window);
 		glfwPollEvents();
@@ -138,6 +166,7 @@ int	main(int ac, char **av)
 	}
 	//obj_load(&env, av[1]);
 	window_init(&env);
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	loop(&env);
 	return (EXIT_SUCCESS);
 }

@@ -6,18 +6,19 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 16:19:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 17:20:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
-# include "../libft/includes/libft.h"
+# include "../libft/include/libft.h"
 # include <GLFW/glfw3.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 
 # define ERROR(x) (error_quit(x, __FILE__, __LINE__))
 
@@ -31,6 +32,7 @@ typedef struct s_obj				t_obj;
 typedef struct s_window				t_window;
 typedef struct s_camera				t_camera;
 typedef struct s_env				t_env;
+typedef struct s_matrix				t_matrix;
 
 void	error_quit(char *error, char *file, int line);
 void	window_init(t_env *env);
@@ -56,6 +58,13 @@ int		parse_valid_number(char *datas);
 void	free_array(char **array);
 char	*read_file(char *file);
 GLuint	shader_create(char *vertex, char *fragment);
+t_matrix	*matrix_create_identity();
+t_matrix	*matrix_create_translation(double x, double y, double z);
+t_matrix	*matrix_create_scale(double scale);
+t_matrix	*matrix_create_rotate_x(double angle);
+t_matrix	*matrix_create_rotate_y(double angle);
+t_matrix	*matrix_create_rotate_z(double angle);
+t_matrix	*matrix_create_projection(double fov, double ratio, double near, double far);
 
 struct							s_obj_vertex
 {
@@ -129,6 +138,11 @@ struct							s_camera
 	float						rx;
 	float						ry;
 	float						rz;
+};
+
+struct							s_matrix
+{
+	double						value[4][4];
 };
 
 struct							s_env
