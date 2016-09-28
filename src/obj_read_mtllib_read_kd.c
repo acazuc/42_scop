@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_read_mtllib_read_ka.c                          :+:      :+:    :+:   */
+/*   obj_read_mtllib_read_kd.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 13:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:44:18 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/28 13:38:04 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/28 13:43:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	obj_read_mtllib_read_ka(t_obj *obj, char *line)
+void	obj_read_mtllib_read_kd(t_obj *obj, char *line)
 {
 	char	**datas;
-	
+
 	if (!(datas = ft_strsplit(line, ' ')))
 		ERROR("ft_strsplit failed");
 	if (!datas[0] || !datas[1] || !datas[2] || !datas[3] || datas[4])
-		ERROR("invalid mtl ka line");
+		ERROR("invalid mtllib kd line");
 	if (!parse_valid_number(datas[1]) || !parse_valid_number(datas[2])
 			|| !parse_valid_number(datas[3]))
-		ERROR("invalid mtl ka values");
+		ERROR("invalid mtllib kd values");
 	if (!obj->current_mtl)
-		ERROR("no current mtl for Ka value");
-	obj->current_mtl->mtl.kar = ft_atod(datas[1]);
-	obj->current_mtl->mtl.kag = ft_atod(datas[2]);
-	obj->current_mtl->mtl.kab = ft_atod(datas[3]);
-	if (obj->current_mtl->mtl.kar < 0 || obj->current_mtl->mtl.kar > 1)
+		ERROR("no current mtl for Kd values");
+	obj->current_mtl->mtl.kdr = ft_atod(datas[1]);
+	obj->current_mtl->mtl.kdg = ft_atod(datas[2]);
+	obj->current_mtl->mtl.kdb = ft_atod(datas[3]);
+	if (obj->current_mtl->mtl.kdr < 0 || obj->current_mtl->mtl.kdr > 1)
 		ERROR("mtl Kd values must be between 0 and 1");
-	if (obj->current_mtl->mtl.kag < 0 || obj->current_mtl->mtl.kag > 1)
+	if (obj->current_mtl->mtl.kdg < 0 || obj->current_mtl->mtl.kdg > 1)
 		ERROR("mtl Kd values must be between 0 and 1");
-	if (obj->current_mtl->mtl.kab < 0 || obj->current_mtl->mtl.kab > 1)
+	if (obj->current_mtl->mtl.kdb < 0 || obj->current_mtl->mtl.kdb > 1)
 		ERROR("mtl Kd values must be between 0 and 1");
 	free_array(datas);
 }

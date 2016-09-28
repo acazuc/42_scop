@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:34:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:42:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,12 @@ struct							s_obj_mtl
 	float						kar;
 	float						kag;
 	float						kab;
-	float						kd;
-	float						ks;
+	float						kdr;
+	float						kdg;
+	float						kdb;
+	float						ksr;
+	float						ksg;
+	float						ksb;
 	float						ns;
 	float						tr;
 	int							illum;
