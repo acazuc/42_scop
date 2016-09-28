@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:05:49 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 12:25:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:09:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		push_face(t_obj *obj, char **datas)
 {
 	t_obj_face	face;
 
-	face.mtl = obj->current_mtl;
+	face.mtl = obj->used_mtl;;
 	face.is_quad = datas[4] != NULL;
 	face.v1 = ft_atoi(datas[1]);
 	face.v2 = ft_atoi(datas[2]);

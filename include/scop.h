@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:53:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:08:47 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ struct							s_obj
 	t_obj_face_list				*faces;
 	t_obj_mtl_list				*mtls;
 	t_obj_mtl_list				*current_mtl;
+	char						*used_mtl;
 	int							smooth;
 };
 

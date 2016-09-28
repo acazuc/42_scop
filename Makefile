@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/28 13:54:36 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/28 14:06:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRCS_NAME = main.c \
 			obj_read_mtllib_read_kd.c \
 			obj_read_mtllib_read_ks.c \
 			obj_read_mtllib_read_ni.c \
+			obj_read_mtllib_read_tr.c \
+			obj_read_mtllib_read_d.c \
+			obj_read_mtllib_read_newmtl.c \
 			parse_valid_number.c \
 			free_array.c \
 
