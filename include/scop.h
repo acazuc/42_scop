@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 18:01:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:35:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ struct							s_camera
 
 struct							s_matrix
 {
-	double						value[4][4];
+	float						value[4][4];
 };
 
 struct							s_env

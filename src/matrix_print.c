@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 17:59:23 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 18:02:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:10:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,15 @@ void	matrix_print(t_matrix *matrix)
 		x = 0;
 		while (x < 4)
 		{
-			ft_putnbr((int)(matrix->value[y][x]) % 10);
-			ft_putnbr((int)(matrix->value[y][x] * 100) % 1000);
+			if (matrix->value[y][x] < 0)
+				ft_putchar('-');
+			else
+				ft_putchar(' ');
+			ft_putnbr(abs((int)(matrix->value[y][x]) % 10));
+			ft_putchar('.');
+			ft_putnbr(abs((int)(matrix->value[y][x] * 100) % 100));
+			if ((int)(matrix->value[y][x] * 100) % 100 < 10)
+				ft_putchar(' ');
 			if (x != 3)
 				ft_putchar(' ');
 			++x;

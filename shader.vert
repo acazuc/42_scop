@@ -6,5 +6,5 @@ uniform mat4 ft_matrix;
 
 void main()
 {
-	gl_Position =  ft_matrix * vec4(vertexPosition_modelspace, 1);
+	gl_Position = ft_matrix * vec4(vertexPosition_modelspace, 1);
 }

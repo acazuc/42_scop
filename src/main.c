@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:56:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:45:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_matrix	*get_rotation_matrix()
 
 	if (!(rx = matrix_create_rotate_x(0)))
 		ERROR("failed to create rotate x matrix");
-	if (!(ry = matrix_create_rotate_y(1)))
+	if (!(ry = matrix_create_rotate_y(ft_toradians(90))))
 		ERROR("failed to create rotate y matrix");
 	if (!(rz = matrix_create_rotate_z(0)))
 		ERROR("failed to create rotate z matrix");
@@ -132,8 +132,18 @@ t_matrix	*get_final_matrix(t_env *env)
 		ERROR("failed to create translation matrix");
 	if (!(model = matrix_create_identity()))
 		ERROR("failed to creatre identity matrix");
+	ft_putendl("projection");
+	matrix_print(projection);
+	ft_putendl("\nrotation");
+	matrix_print(rotation);
+	ft_putendl("\nposition");
+	matrix_print(position);
 	matrix_mult(projection, rotation);
+	ft_putendl("\nprojection + rotation");
+	matrix_print(projection);
 	matrix_mult(projection, position);
+	ft_putendl("\nprojection + rotation + position");
+	matrix_print(projection);
 	matrix_mult(projection, model);
 	free(rotation);
 	free(position);
@@ -155,19 +165,12 @@ void		loop(t_env *env)
 	t_matrix *matrix;
 	if (!(matrix = get_final_matrix(env)))
 		ERROR("failed to get final matrix");
-	for (int y = 0; y < 4; ++y)
-	{
-		for (int x = 0; x < 4; ++x)
-		{
-			printf("%f ", matrix->value[y][x]);
-		}
-		printf("\n");
-	}
+	matrix_print(matrix);
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
-		glUniformMatrix4dv(MatrixID, 1, GL_FALSE, &matrix->value[0][0]);
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &matrix->value[0][0]);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
