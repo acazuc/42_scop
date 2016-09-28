@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:56:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:01:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_matrix	*matrix_create_rotate_y(double angle);
 t_matrix	*matrix_create_rotate_z(double angle);
 t_matrix	*matrix_create_projection(double fov, double ratio, double near, double far);
 void		matrix_mult(t_matrix *m1, t_matrix *m2);
+void		matrix_print(t_matrix *matrix);
 
 struct							s_obj_vertex
 {
