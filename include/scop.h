@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:42:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:53:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ struct							s_obj_mtl
 	float						ksg;
 	float						ksb;
 	float						ns;
+	float						ni;
 	float						tr;
 	int							illum;
 };
