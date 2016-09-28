@@ -2,3 +2,4 @@ libft
 scop
 obj
 *.swp
+mlx/*.o
