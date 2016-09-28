@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 14:08:47 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:16:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	obj_read_mtllib_read_ks(t_obj *obj, char *line);
 void	obj_read_mtllib_read_ni(t_obj *obj, char *line);
 void	obj_read_mtllib_read_tr(t_obj *obj, char *line);
 void	obj_read_mtllib_read_d(t_obj *obj, char *line);
+void	obj_read_mtllib_read_illum(t_obj *obj, char *line);
 void	obj_read_mtllib_read_newmtl(t_obj *obj, char *line);
 char	*read_next_line(int fd, ssize_t *readed);
 int		parse_valid_number(char *datas);
