@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 16:57:29 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:01:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:58:49 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ t_matrix	*matrix_create_translation(double x, double y, double z)
 {
 	t_matrix	*matrix;
 
-	if (!(matrix = malloc(sizeof(*matrix))))
+	if (!(matrix = matrix_create()))
 		return (NULL);
-	ft_bzero(matrix, sizeof(*matrix));
 	matrix->value[0][0] = 1;
 	matrix->value[1][1] = 1;
 	matrix->value[2][2] = 1;

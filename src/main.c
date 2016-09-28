@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 14:57:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 18:45:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 19:17:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_matrix	*get_rotation_matrix()
 
 	if (!(rx = matrix_create_rotate_x(0)))
 		ERROR("failed to create rotate x matrix");
-	if (!(ry = matrix_create_rotate_y(ft_toradians(90))))
+	if (!(ry = matrix_create_rotate_y(1)))
 		ERROR("failed to create rotate y matrix");
 	if (!(rz = matrix_create_rotate_z(0)))
 		ERROR("failed to create rotate z matrix");
@@ -145,9 +145,13 @@ t_matrix	*get_final_matrix(t_env *env)
 	ft_putendl("\nprojection + rotation + position");
 	matrix_print(projection);
 	matrix_mult(projection, model);
+	ft_putendl("free1");
 	free(rotation);
+	ft_putendl("free2");
 	free(position);
+	ft_putendl("free3");
 	free(model);
+	ft_putendl("free4");
 	return (projection);
 }
 

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 17:38:29 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:55:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 19:16:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,23 @@ static double		matrix_mult_path(t_matrix *m1, t_matrix *m2, int x, int y)
 
 void				matrix_mult(t_matrix *m1, t_matrix *m2)
 {
-	double		new[4][4];
+	float		new[4][4];
 	int			x;
 	int			y;
 
 	ft_bzero(new, sizeof(new));
-	y = 0;
+	y = -1;
 	while (y < 4)
 	{
-		x = 0;
-		while (x < 4)
-		{
+		x = -1;
+		while (++x < 4)
 			new[y][x] = matrix_mult_path(m1, m2, x, y);
-			++x;
-		}
-		++y;
 	}
-	ft_memcpy(m1->value, new, sizeof(new));
+	y = -1;
+	while (++y < 4)
+	{
+		x = -1;
+		while (++x < 4)
+			m1->value[y][x] = new[y][x];
+	}
 }

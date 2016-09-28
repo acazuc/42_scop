@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 18:35:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 19:15:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		parse_valid_number(char *datas);
 void	free_array(char **array);
 char	*read_file(char *file);
 GLuint	shader_create(char *vertex, char *fragment);
+t_matrix	*matrix_create();
 t_matrix	*matrix_create_identity();
 t_matrix	*matrix_create_translation(double x, double y, double z);
 t_matrix	*matrix_create_scale(double scale);
@@ -145,7 +146,7 @@ struct							s_camera
 
 struct							s_matrix
 {
-	float						value[4][4];
+	float						**value;
 };
 
 struct							s_env

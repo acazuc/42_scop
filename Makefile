@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/28 18:02:24 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/28 18:57:28 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS_NAME = main.c \
 			free_array.c \
 			read_file.c \
 			shader_create.c \
+			matrix_create.c \
 			matrix_create_identity.c \
 			matrix_create_translation.c \
 			matrix_create_scale.c \

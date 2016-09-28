@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 17:12:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 17:17:50 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 18:58:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ t_matrix	*matrix_create_projection(double fov_o, double ratio, double near, doub
 	t_matrix	*matrix;
 	double		fov;
 
-	if (!(matrix = malloc(sizeof(*matrix))))
+	if (!(matrix = matrix_create()))
 		return (NULL);
-	ft_bzero(matrix, sizeof(*matrix));
 	fov = 1 / tan(fov_o / 2);
 	matrix->value[0][0] = fov / ratio;
 	matrix->value[1][1] = fov;
