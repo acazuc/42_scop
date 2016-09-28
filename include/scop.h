@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:00:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:27:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:34:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	obj_read_mtllib_read_ks(t_obj *obj, char *line);
 void	obj_read_mtllib_read_ni(t_obj *obj, char *line);
 void	obj_read_mtllib_read_tr(t_obj *obj, char *line);
 void	obj_read_mtllib_read_d(t_obj *obj, char *line);
+void	obj_read_mtllib_read_newmtl(t_obj *obj, char *line);
 char	*read_next_line(int fd, ssize_t *readed);
 int		parse_valid_number(char *datas);
 void	free_array(char **array);
@@ -84,7 +85,10 @@ struct							s_obj_face_list
 
 struct							s_obj_mtl
 {
-	float						ka;
+	char						*name;
+	float						kar;
+	float						kag;
+	float						kab;
 	float						kd;
 	float						ks;
 	float						ns;
@@ -94,8 +98,8 @@ struct							s_obj_mtl
 
 struct							s_obj_mtl_list
 {
-	t_mtl						mtl;
-	t_mtl_list					*next;
+	t_obj_mtl					mtl;
+	t_obj_mtl_list				*next;
 };
 
 struct							s_obj
@@ -103,7 +107,8 @@ struct							s_obj
 	char						*file;
 	t_obj_vertex_list			*vertexes;
 	t_obj_face_list				*faces;
-	char						*current_mtl;
+	t_obj_mtl_list				*mtls;
+	t_obj_mtl_list				*current_mtl;
 	int							smooth;
 };
 

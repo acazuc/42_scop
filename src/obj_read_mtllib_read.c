@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 13:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:27:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:34:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	obj_read_mtlllib_read(t_obj *obj, int fd)
 			obj_read_mtllib_read_tr(obj, line);
 		else if (line[0] == 'd' && line[1] == ' ')
 			obj_read_mtllib_read_d(obj, line);
+		else if (ft_strlen(line) >= 7 && !ft_strncmp(line, "newmtl ", 7))
+			obj_read_mtllib_read_newmtl(obj, line);
 	}
 	if (readed == -1)
 		ERROR("failed to read mtllib file");

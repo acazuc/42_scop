@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 12:50:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/28 13:19:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/28 13:35:21 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*get_obj_path(char *file)
 			ERROR("ft_strdup failed");
 		return (result);
 	}
-	if (!(result = ft_strnew(result - file)))
+	if (!(result = ft_strnew(last_slash - file)))
 		ERROR("ft_strnew failed");
 	ft_strncat(result, file, last_slash - file);
 	return (result);
